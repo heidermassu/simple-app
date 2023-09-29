@@ -9,7 +9,7 @@ on:
   schedule:
     - cron: '41 4 * * *'
   push:
-    branches: [ "main" ]
+    branches: [ * ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
@@ -122,7 +122,7 @@ jobs:
           cluster-name: ${{ env.CLUSTER_NAME }}
           admin: 'false'
           use-kubelogin: 'true'
-          
+
       # Deploys application using the built Docker image
       - name: Deploys application
         uses: Azure/k8s-deploy@v4
