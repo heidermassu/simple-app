@@ -128,7 +128,7 @@ jobs:
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
-          manifests: path/to/your/kubernetes/manifests.yaml
+          manifests: ../deployment.yaml
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.build-and-push.outputs.tags }}
           namespace: ${{ env.AKS_NAMESPACE }}
           name: ${{ env.AKS_DEPLOYMENT_NAME }}
