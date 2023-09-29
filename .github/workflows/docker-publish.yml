@@ -114,7 +114,11 @@ jobs:
         uses: azure/use-kubelogin@v1
         with:
           kubelogin-version: 'v0.0.25'
-
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
       # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
       - name: Get K8s context
         uses: azure/aks-set-context@v3
@@ -131,5 +135,5 @@ jobs:
           action: deploy
           manifests: ../deployment.yaml
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.build-and-push.outputs.tags }}
-          namespace: ${{ env.AKS_NAMESPACE }}
-          name: ${{ env.AKS_DEPLOYMENT_NAME }}
+          namespace: ${{ vars.AKS_NAMESPACE }}
+          name: ${{ vars.AKS_DEPLOYMENT_NAME }}
